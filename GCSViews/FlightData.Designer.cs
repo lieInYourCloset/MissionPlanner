@@ -189,6 +189,7 @@ namespace MissionPlanner.GCSViews
             this.but_bintolog = new MissionPlanner.Controls.MyButton();
             this.but_dflogtokml = new MissionPlanner.Controls.MyButton();
             this.BUT_loganalysis = new MissionPlanner.Controls.MyButton();
+            this.but_dflogtocsv = new MissionPlanner.Controls.MyButton();
             this.panel_persistent = new System.Windows.Forms.Panel();
             this.tableMap = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -2385,6 +2386,7 @@ namespace MissionPlanner.GCSViews
             this.tableLayoutPanel2.Controls.Add(this.but_bintolog, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.but_dflogtokml, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.BUT_loganalysis, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.but_dflogtocsv, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // BUT_DFMavlink
@@ -2459,6 +2461,18 @@ namespace MissionPlanner.GCSViews
             this.BUT_loganalysis.TextColorNotEnabled = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(87)))), ((int)(((byte)(4)))));
             this.BUT_loganalysis.UseVisualStyleBackColor = true;
             this.BUT_loganalysis.Click += new System.EventHandler(this.BUT_loganalysis_Click);
+
+            // 
+            // but_dflogtocsv
+            // 
+            this.but_dflogtocsv.ColorMouseDown = System.Drawing.Color.Empty;
+            this.but_dflogtocsv.ColorMouseOver = System.Drawing.Color.Empty;
+            this.but_dflogtocsv.ColorNotEnabled = System.Drawing.Color.Empty;
+            resources.ApplyResources(this.but_dflogtocsv, "but_dflogtocsv");
+            this.but_dflogtocsv.Name = "but_dflogtocsv";
+            this.but_dflogtocsv.TextColorNotEnabled = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(87)))), ((int)(((byte)(4)))));
+            this.but_dflogtocsv.UseVisualStyleBackColor = true;
+            this.but_dflogtocsv.Click += new System.EventHandler(this.but_dflogtocsv_Click);
             // 
             // panel_persistent
             // 
@@ -3099,6 +3113,7 @@ namespace MissionPlanner.GCSViews
         public Controls.WindDir windDir1;
         private Controls.MyButton but_bintolog;
         private Controls.MyButton but_dflogtokml;
+        private Controls.MyButton but_dflogtocsv;
         private Controls.MyButton BUT_DFMavlink;
         public System.Windows.Forms.TabPage tabPagemessages;
         private System.Windows.Forms.TextBox txt_messagebox;

@@ -1189,6 +1189,59 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        private void but_dflogtocsv_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
+            {
+                openFileDialog1.Filter = "Log Files|*.log;*.bin;*.BIN;*.LOG";
+                openFileDialog1.FilterIndex = 2;
+                openFileDialog1.RestoreDirectory = true;
+                openFileDialog1.Multiselect = true;
+                try
+                {
+                    openFileDialog1.InitialDirectory = tlogdir;
+                }
+                catch
+                {
+                } // in case dir doesn't exist
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (string logfile in openFileDialog1.FileNames)
+                    {
+                        try
+                        {
+                            string csvFile = Path.ChangeExtension(logfile, ".csv");
+                            
+                            // Use a simple background task to avoid blocking the UI
+                            var task = System.Threading.Tasks.Task.Run(() =>
+                            {
+                                LogCsvExporter.ExportToCSV(logfile);
+                            });
+
+                            // Show a simple progress message
+                            CustomMessageBox.Show($"Exporting log to CSV...\nInput: {Path.GetFileName(logfile)}\nOutput: {Path.GetFileName(csvFile)}\n\nThis may take a few moments.", "CSV Export");
+
+                            task.Wait(); // Wait for completion
+
+                            if (File.Exists(csvFile))
+                            {
+                                CustomMessageBox.Show($"Log exported successfully!\n\nCSV file created: {csvFile}", "Export Complete");
+                            }
+                            else
+                            {
+                                CustomMessageBox.Show("Export may have failed - CSV file not found.", "Export Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.Show("Error exporting log file:\n" + ex.Message, Strings.ERROR);
+                        }
+                    }
+                }
+            }
+        }
+
         private void BUT_DFMavlink_Click(object sender, EventArgs e)
         {
             var form = new LogDownloadMavLink();
