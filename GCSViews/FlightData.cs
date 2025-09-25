@@ -1211,49 +1211,31 @@ namespace MissionPlanner.GCSViews
                     {
                         try
                         {
-                            // Show progress dialog
-                            var progressDialog = new ProgressReporterDialogue();
-                            progressDialog.Text = "Exporting to CSV";
-                            progressDialog.SetProgressLimitsAndBarsLength(0, 100, 1);
-                            progressDialog.UpdateProgressAndStatus(0, "Starting CSV export...");
-
-                            var worker = new System.Threading.Tasks.Task(() =>
+                            string csvFile = Path.ChangeExtension(logfile, ".csv");
+                            
+                            // Use a simple background task to avoid blocking the UI
+                            var task = System.Threading.Tasks.Task.Run(() =>
                             {
-                                try
-                                {
-                                    LogCsvExporter.ExportToCSV(logfile, (progress) =>
-                                    {
-                                        progressDialog.UpdateProgressAndStatus(progress, $"Processing... {progress}%");
-                                    });
-
-                                    progressDialog.UpdateProgressAndStatus(100, "CSV export completed!");
-                                    System.Threading.Thread.Sleep(1000); // Show completion briefly
-                                }
-                                catch (Exception ex)
-                                {
-                                    progressDialog.UpdateProgressAndStatus(-1, "Error: " + ex.Message);
-                                    System.Threading.Thread.Sleep(2000);
-                                }
-                                finally
-                                {
-                                    progressDialog.Close();
-                                }
+                                LogCsvExporter.ExportToCSV(logfile);
                             });
 
-                            progressDialog.doWorkArgs.CancelRequestChanged += (s, ev) =>
+                            // Show a simple progress message
+                            CustomMessageBox.Show($"Exporting log to CSV...\nInput: {Path.GetFileName(logfile)}\nOutput: {Path.GetFileName(csvFile)}\n\nThis may take a few moments.", "CSV Export");
+
+                            task.Wait(); // Wait for completion
+
+                            if (File.Exists(csvFile))
                             {
-                                // TODO: Implement cancellation if needed
-                            };
-
-                            worker.Start();
-                            progressDialog.ShowDialog();
-
-                            string csvFile = Path.ChangeExtension(logfile, ".csv");
-                            CustomMessageBox.Show($"Log exported successfully to:\n{csvFile}", "Export Complete");
+                                CustomMessageBox.Show($"Log exported successfully!\n\nCSV file created: {csvFile}", "Export Complete");
+                            }
+                            else
+                            {
+                                CustomMessageBox.Show("Export may have failed - CSV file not found.", "Export Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                         catch (Exception ex)
                         {
-                            CustomMessageBox.Show("Error exporting log file: " + ex.Message, Strings.ERROR);
+                            CustomMessageBox.Show("Error exporting log file:\n" + ex.Message, Strings.ERROR);
                         }
                     }
                 }

@@ -174,7 +174,7 @@ namespace MissionPlanner.Utilities
                 // Check GPS status - only export if we have a valid fix (3D lock or better)
                 if (statusIndex != -1 && statusIndex < items.Length)
                 {
-                    if (!int.TryParse(items[statusIndex], out int status) || status < 3)
+                    if (!int.TryParse(items[statusIndex].Trim(), out int status) || status < 3)
                         return null;
                 }
 
@@ -247,15 +247,16 @@ namespace MissionPlanner.Utilities
             }
         }
 
-        private static double GetSafeDouble(string[] items, int index)
+        private static string GetSafeDouble(string[] items, int index)
         {
             if (index == -1 || index >= items.Length)
-                return 0.0;
+                return "0";
 
-            if (double.TryParse(items[index], NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
-                return result;
+            var value = items[index].Trim();
+            if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
+                return result.ToString("F6", CultureInfo.InvariantCulture);
 
-            return 0.0;
+            return "0";
         }
     }
 }
