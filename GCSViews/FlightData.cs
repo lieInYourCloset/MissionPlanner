@@ -1189,6 +1189,77 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        private void but_dflogtocsv_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
+            {
+                openFileDialog1.Filter = "Log Files|*.log;*.bin;*.BIN;*.LOG";
+                openFileDialog1.FilterIndex = 2;
+                openFileDialog1.RestoreDirectory = true;
+                openFileDialog1.Multiselect = true;
+                try
+                {
+                    openFileDialog1.InitialDirectory = tlogdir;
+                }
+                catch
+                {
+                } // in case dir doesn't exist
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (string logfile in openFileDialog1.FileNames)
+                    {
+                        try
+                        {
+                            // Show progress dialog
+                            var progressDialog = new ProgressReporterDialogue();
+                            progressDialog.Text = "Exporting to CSV";
+                            progressDialog.SetProgressLimitsAndBarsLength(0, 100, 1);
+                            progressDialog.UpdateProgressAndStatus(0, "Starting CSV export...");
+
+                            var worker = new System.Threading.Tasks.Task(() =>
+                            {
+                                try
+                                {
+                                    LogCsvExporter.ExportToCSV(logfile, (progress) =>
+                                    {
+                                        progressDialog.UpdateProgressAndStatus(progress, $"Processing... {progress}%");
+                                    });
+
+                                    progressDialog.UpdateProgressAndStatus(100, "CSV export completed!");
+                                    System.Threading.Thread.Sleep(1000); // Show completion briefly
+                                }
+                                catch (Exception ex)
+                                {
+                                    progressDialog.UpdateProgressAndStatus(-1, "Error: " + ex.Message);
+                                    System.Threading.Thread.Sleep(2000);
+                                }
+                                finally
+                                {
+                                    progressDialog.Close();
+                                }
+                            });
+
+                            progressDialog.doWorkArgs.CancelRequestChanged += (s, ev) =>
+                            {
+                                // TODO: Implement cancellation if needed
+                            };
+
+                            worker.Start();
+                            progressDialog.ShowDialog();
+
+                            string csvFile = Path.ChangeExtension(logfile, ".csv");
+                            CustomMessageBox.Show($"Log exported successfully to:\n{csvFile}", "Export Complete");
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.Show("Error exporting log file: " + ex.Message, Strings.ERROR);
+                        }
+                    }
+                }
+            }
+        }
+
         private void BUT_DFMavlink_Click(object sender, EventArgs e)
         {
             var form = new LogDownloadMavLink();

@@ -5101,6 +5101,33 @@
   <data name="&gt;&gt;but_dflogtokml.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="but_dflogtocsv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="but_dflogtocsv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 91</value>
+  </data>
+  <data name="but_dflogtocsv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 38</value>
+  </data>
+  <data name="but_dflogtocsv.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="but_dflogtocsv.Text" xml:space="preserve">
+    <value>Export CSV</value>
+  </data>
+  <data name="&gt;&gt;but_dflogtocsv.Name" xml:space="preserve">
+    <value>but_dflogtocsv</value>
+  </data>
+  <data name="&gt;&gt;but_dflogtocsv.Type" xml:space="preserve">
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;but_dflogtocsv.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;but_dflogtocsv.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="BUT_loganalysis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -5153,7 +5180,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="BUT_DFMavlink" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="BUT_georefimage" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="BUT_logbrowse" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="BUT_matlab" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="but_bintolog" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="but_dflogtokml" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="BUT_loganalysis" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;Rows Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="BUT_DFMavlink" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="BUT_georefimage" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="BUT_logbrowse" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="BUT_matlab" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="but_bintolog" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="but_dflogtokml" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="BUT_loganalysis" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="but_dflogtocsv" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;Rows Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tablogbrowse.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 44</value>
